@@ -2,59 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Homework</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <style>
+    i {
+      font-size: 50px;
+    }
+    .golden {
+      color: gold;
+    }
+  </style>
 </head>
 <body>
-<!--
-Обязательное задание.
+<div class="stars_container">
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+  <i class="fas fa-star"></i>
+</div>
 
-Необходимо вывести в консоль значения выражений:
-10 + 10 + "10"
-10 + "10" + 10
-10 + 10 + +"10"
-10 / -""
-10 / +"2,5"
-В этих выражениях нет опечаток, вам их нужно скопировать и вывести в консоль.
-
-Над каждым выводом в консоль необходимо объяснить почему мы получаем такой
-результат.
-
-Объяснения пишите в таком формате:
-/*
-1. 4 умножаем на 2 получаем 8.
-2. 3 минус 8 получаем -5.
-3. С помощью console.log выводим число -5 в консоль.
-*/
-console.log(3 - 4 * 2);
--->
 <script>
   "use strict";
 
-  console.log(10 + 10 + "10");
   /*
-    1. К 10 прибавляем 10 получаем 20.
-    2. При складывании числа и строки, число конвертируется в строку и идет склеивание двух строк, получаем строку "2010".
+  1. При наведении на любую из звезд, данной звезде должен ставиться класс
+  golden, также такой класс должен ставиться всем звездам до нее слева.
   */
-  console.log(10 + "10" + 10);
+
+  document.querySelector('.stars_container').addEventListener('mouseover', e => {
+    let star = e.target;
+    do {
+      star.classList.add('golden');
+      star = star.previousElementSibling;
+    } while (star);
+  });
+
+
   /*
-    1. При складывании числа и строки, число конвертируется в строку и идет склеивание двух строк, получаем строку "1010".
-    1. При складывании числа и строки, число конвертируется в строку и идет склеивание двух строк, получаем строку "101010".
-  */
-  console.log(10 + 10 + +"10");
+  2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
+  задания должны быть удалены.
+   */
+
+  document.querySelector('.stars_container').addEventListener('mouseout', e => {
+    let star = e.target;
+    do {
+      star.classList.remove('golden');
+      star = star.previousElementSibling;
+    } while (star);
+  });
+
+
   /*
-    1. К 10 прибавляем 10 получаем 20.
-    2. Знак + перед кавычками строки переводит ее в число, поэтому мы прибавляем 10 к 20 и получаем 30.
+  3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
+  звезды (временно могут становиться черными). Почему так? Напишите словами.
+  Можем ли мы это исправить? Если да, то предложите решение.
   */
-  console.log(10 / -"");
-  /*
-    1. Имеем пустую строку, перед строкой знак -, переводится в число -0.
-    2. Деление на 0 в JS считается возможным и получается бесконечность, но из-за знака - получается -бесконечность.
-  */
-  console.log(10 / +"2,5");
-  /*
-    1. Внутри строки неправильно записано число (должна быть . вместо ,)
-    2. Из-за этого при переводе в число возникла ошибка NaN (не является числом)
-  */
+
+  document.querySelector('.stars_container').childNodes.forEach(node => {
+    if (node.nodeName === '#text') {
+      node.remove();
+    }
+  });
+
+
 </script>
 </body>
 </html>
